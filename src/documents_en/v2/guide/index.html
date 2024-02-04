@@ -1,115 +1,39 @@
----
-title: 'Getting Started'
-order: 20
-tocGroup: guide
-layout: docs.html.eco
-description: 'Lean how to get started with Onsen UI, the Web Components based HTML5 mobile UI framework for hybrid and PWA. Works with Angular, React, Vue, Meteor and more.'
----
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
 
-<%- @markdown => %>
+<template id="page1.html">
+  <ons-page id="page1">
+    <ons-toolbar>
+      <div class="center">Page 1</div>
+    </ons-toolbar>
 
-### Getting Started
+    <p>This is the first page.</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U_83GjDpGMU?ecver=1" frameborder="0" allowfullscreen></iframe>
+    <ons-button id="push-button">Push page</ons-button>
+  </ons-page>
+</template>
 
->The official guide assumes basic level knowledge of HTML, CSS, and JavaScript. If you are totally new to JavaScript development, it might be the best to grasp the basics then come back and reading through the guide.
+<template id="page2.html">
+  <ons-page id="page2">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+      <div class="center"></div>
+    </ons-toolbar>
 
+    <p>This is the second page.</p>
+  </ons-page>
+</template>
 
-#### What is Onsen UI?
+<script>
+document.addEventListener('init', function(event) {
+  var page = event.target;
 
-Onsen UI is...
-
-- A large set of rich **UI components** specifically designed for mobile apps
-- Packed with ready-to-implement features following **native iOS and Android design standards**
-- Free to use, **100% open source** software ([Apache v2 license](https://github.com/OnsenUI/OnsenUI/blob/master/LICENSE))
-
-Onsen UI enriches app users' mobile experience with natively designed UI elements. It's perfect for developing hybrid apps using Cordova or developing mobile web apps (also referred to as [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)). For more information on these types of implementation, see [Deploy to PWA & Cordova](/v2/guide/deploy.html#deploying-your-app).
-
-##### Future-Proof Architecture
-
-Under the hood, Onsen UI consists of three layers:
-
-1. **CSS Components**, written in [cssnext](https://cssnext.github.io/), the next generation of CSS
-2. **Web Components**, written in native JavaScript to **support ALL frameworks**
-3. **Framework Bindings**, created for tighter integration with popular frameworks such as [Vue.js](vue), [AngularJS 1](angular1), [Angular 2+](angular2), and [React](react)
-
-In a nutshell, Onsen UI simplifies your development, works with any framework, and is **future proof**!
-
-Interested in a deep dive? Check out our [Onsen UI Architecture](architecture.html) section.
-
-##### What's Included (Kitchensink)
-
-Here you can try out the majority of Onsen UI's components in a quick sample demo app (kitchen sink app). The two apps below are actually sharing the same source code but are styled to fit their respective platforms using the [Auto Styling](theming.html#auto-styling) feature.
-
-<iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", "vanilla/common_patterns/kitchensink", false %>"></iframe>
-
-For those interested in the complete list of components, please take a look at the [CSS Components](../api/css.html) and the [Web Components](../api/js).
-
-##### Browser and Device Support
-
-Onsen UI is fully optimized and tested for the following platforms.
-
-- Mobile
-  - **iOS 9 and up**
-  - **Android 4.4.4 and up** with WebView or Chrome browser
-    (Android 4.0 and up with [Crosswalk engine](https://crosswalk-project.org/))
-- Desktop
-  - Latest version of Safari browser
-  - Latest version of Chrome browser
-
-For other platforms, please be aware that some components or features may not work correctly. Please see [Old Browser Support](/v2/guide/faq.html#old-browsers) for details.
-
-#### The First Onsen UI App
-
-Now that you’re familiar with what Onsen UI is all about, it's time to start creating your own app. For quicker installation, let's use the CDN served files.
-First, create a file called `index.html` and paste the following HTML.
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-</head>
-<body>
-  <ons-button onclick="alert('Hello World!')">Click Me</ons-button>
-</body>
-</html>
-```
-
-<img src="/images/guide/first_onsen_ui_app.png" style="border: 1px solid #ccc;">
-
-While this may be rudimentary, this example contains some important aspects of Onsen UI components as below.
-- You need to include two CSS files (`onsenui.css` and `onsen-css-components.min.css`) and one JavaScript file (`onsenui.min.js`).
-- In the code above, `<ons-button>` component is used. It is our custom tag that represents a button. All Onsen UI branded components have the `ons-` prefix.
-- Like other standard tags (or HTML elements), Onsen UI components have attributes (in this case `onclick`), methods and event listeners. Read more in [Attributes, Properties, Methods and Events](/v2/guide/fundamentals.html#attributes-properties-methods-and-events).
-
-Congratulations! You've covered all the basics to get started. Now find Onsen UI components (i.e. `<ons-input>`, `<ons-icon>`, `<ons-carousel>`...) from [our collection](../api/js), and put them in your app. It's that simple.
-
->Tips on native alert: You may have noticed, default `alert()` function does not fit with native app design. Therefore, Onsen UI provides [`ons.notification`](../api/js/ons.notification.html) object for dialogs. Try replacing `alert` with `ons.notification.alert`!
-><img src="/images/guide/first_onsen_ui_app_native_alert.png" style="margin-top: 16px; border: 1px solid #ccc;">
-
-#### Making Your Web & Hybrid App Feel Native
-
-Even though an app may emulate the visual components of iPhone or Android, the goal of a seamless app is to ensure that touch & feel also meets users' expectations. That's where the users feel the "uncanny valley".
-
-To fill the gap, Onsen UI gives you the ability to simulate things like page transition animations and the ripple effect, and gives genuine and high quality feeling to your app. Such details make a huge difference.
-
-<iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", "vanilla/reference/navigator", false %>"></iframe>
-
-In the above example, there are two pages defined by `<ons-page>` component. Then, `<ons-navigator>` component provides native-like page transition. If you want to make your app more native-like, please proceed to [Fundamentals](/v2/guide/fundamentals.html) to learn how to fully utilize the details.
-
-In Onsen UI, everything from visual widgets to small details are carefully crafted to help your application look fully native.
-
-#### Useful Resources
-
-Also check out these resources to get you up and running in no time.
-
-- [Playground](/playground/) (Interactive Tutorials): CodePen like tutorial and live coding
-- [Sample apps](/samples): Great starting point for those who want to see the actual code
-- [Showcase](https://monaca.io/great-apps.html): See what apps people are making
-- [Udemy video course](https://www.udemy.com/learn-to-build-your-first-apache-cordova-app/) & [YouTube getting started video](https://www.youtube.com/watch?v=G7CaEEr8kBs)
-
-<% end %>
+  if (page.id === 'page1') {
+    page.querySelector('#push-button').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
+    };
+  } else if (page.id === 'page2') {
+    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+  }
+});
+</script>
 
